@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
-import Popular from './popular'
+import Popular from './popular';
+import Home from './home';
+import Battle from './battle';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Nav from './nav';
 
 class App extends Component {
     render(){
         return (
-            <div className="container">
-                <Popular />
-            </div>
+            <BrowserRouter>
+                <div className="container">
+                    <Nav />
+                    
+                    <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route exact path='/popular' component={Popular} />
+                        <Route exact path='/battle' component={Battle} />
+                        <Route render={function(){
+                            return <p>Not Found</p>;
+                        }} />
+                    </Switch>
+                </div>
+            </BrowserRouter>
             )
     }
 }
