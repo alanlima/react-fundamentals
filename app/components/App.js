@@ -4,6 +4,7 @@ import Home from './home';
 import Battle from './battle';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Nav from './nav';
+import Results from './results'
 
 class App extends Component {
     render(){
@@ -16,6 +17,7 @@ class App extends Component {
                         <Route exact path="/" component={Home} />
                         <Route exact path='/popular' component={Popular} />
                         <Route exact path='/battle' component={Battle} />
+                        <Route path='/battle/results' component={Results} />
                         <Route render={function(){
                             return <p>Not Found</p>;
                         }} />
