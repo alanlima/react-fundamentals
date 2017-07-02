@@ -20,5 +20,11 @@ module.exports = {
     },
     plugins: [new HtmlWebpackPlugin({
         template: 'app/index.html'
-    })]
+    })],
+    resolve: {
+        modules: [
+            path.resolve('./app'),
+            path.resolve('./node_modules')
+        ]
+    }
 };
