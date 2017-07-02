@@ -1,18 +1,18 @@
 import Axios from 'axios';
 
-const id = '';
-const sec = '';
+const id = 'dffb9066a19a36f7d4c7';
+const sec = '8e6735275627df1ac5055e269bd2857551ecafd2';
 const params = '?client_id=' + id + '&client_secret=' + sec;
 
 function getProfile(username) {
-    return Axios.get('https://api.github.com/users/' + username)
+    return Axios.get('https://api.github.com/users/' + username + params)
         .then(function(user){
             return user.data;
         });
 }
 
 function getRepos (username){
-    return Axios.get('https://api.github.com/users/' + username);
+    return Axios.get('https://api.github.com/users/' + username + '/repos' + params + '&per_page=100');
 }
 
 function getStarCount(repos) {
@@ -59,7 +59,7 @@ module.exports = {
         return Axios
             .all(players.map(getUserData))
             .then(sortPlayers)
-            .catch(handleError);
+            .catch(handleError)
     },
 
     fetchPopularRepos: function(language) {
