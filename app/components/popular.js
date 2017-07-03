@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Api from 'utils/api';
 import Loading from 'components/loading';
+import { Link } from 'react-router-dom';
 
 function SelectLanguage (props) {
     var languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
@@ -10,11 +11,13 @@ function SelectLanguage (props) {
         <ul className='languages'>
             {languages.map((lang) => {
                 return (
-                    <li 
-                        style={ lang === props.selectedLanguage ? { color: '#d0021b'} : null }
-                        onClick={() => props.onSelect(lang)}
-                        key={lang}>
-                        {lang}
+                    <li key={lang}>
+                        <Link
+                          onClick={() => props.onSelect(lang)}
+                          style={lang !== props.selectedLanguage ? {color: '#000'} : null}
+                          to={'/popular/' + lang}>
+                                {lang}
+                        </Link>
                     </li>
                 )
             })}
@@ -42,7 +45,7 @@ function RepoGrid(props){
                                     alt={'Avatar for ' + repo.owner.login} 
                                 />
                             </li>
-                            <li><a href={repo.html_url}>{repo.name}</a></li>
+                            <li><a href={repo.html_url} target='_blank'>{repo.name}</a></li>
                             <li>@{repo.owner.login}</li>
                             <li>{repo.stargazers_count} starts</li>
                         </ul>
@@ -61,10 +64,9 @@ class Popular extends Component {
     constructor(props){
         super(props);
         this.state = {
-            selectedLanguage: 'All',
+            selectedLanguage: this.props.match.params.langId || 'All',
             repos: null
         };
-
         this.updateLanguage = this.updateLanguage.bind(this);
     }
 
